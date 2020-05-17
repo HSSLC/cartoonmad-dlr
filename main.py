@@ -11,6 +11,7 @@ def chdir(ds):
         os.chdir(d)
 
 def main():
+    print('僅作為個人使用，勿作為商業用途，版權由包括但不限於原作者與受到原作者合法授權者擁有')
     while True:
         print('輸入作品目錄URL:', end='')
         url = input()
