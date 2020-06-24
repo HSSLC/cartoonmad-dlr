@@ -12,8 +12,14 @@ def download_ch(url, cname):
     res.encoding = 'big5'
     bs = bs4.BeautifulSoup(res.text, features='html.parser')
     pg_list = bs.select('option[value]')
+    threads = []
     for i in range(len(pg_list)):
-        threading.Thread(target=download_pg, args=(base + pg_list[i].attrs['value'], i, cname)).start()
+        t = threading.Thread(target=download_pg, args=(base + pg_list[i].attrs['value'], i, cname))
+        threads.append(t)
+        t.start()
+    for i in threads:
+        i.join()
+        
 
 def download_pg(url, num, cname):
     for i in range(MAX_RETRY):
