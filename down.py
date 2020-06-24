@@ -1,3 +1,6 @@
+# development by HSSLCreative
+# Date: 2020/5/17
+
 import requests, bs4, threading, os
 
 base = 'https://www.cartoonmad.cc/comic/'
@@ -26,8 +29,6 @@ def download_pg(url, num, cname):
             for chunk in img_res.iter_content(100000):
                 file.write(chunk)
             file.close()
-            if threading.active_count() == 3:
-                print('暴走結束')
             return
         except:
             print('一個頁面錯誤 重試中...\n', end='')

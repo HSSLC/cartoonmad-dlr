@@ -1,3 +1,6 @@
+# development by HSSLCreative
+# Date: 2020/5/17
+
 import requests, bs4, re, os, threading
 from down import download_ch
 
@@ -64,4 +67,7 @@ def main():
     print('多執行緒正在暴走中')
     for thread in threads:
         thread.start()
+    for thread in threads:
+        thread.join()
+    print('暴走結束')
 main()
