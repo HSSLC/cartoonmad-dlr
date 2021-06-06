@@ -19,7 +19,7 @@ def download_ch(url, cname):
         t.start()
     for i in threads:
         i.join()
-        
+
 
 def download_pg(url, num, cname):
     for i in range(MAX_RETRY):
@@ -29,7 +29,7 @@ def download_pg(url, num, cname):
             res.encoding = 'big5'
             bs = bs4.BeautifulSoup(res.text, features='html.parser')
             img_src = bs.select('img[src^="https://www.cartoonmad.com/comic/comicpic.asp"]')[0].attrs['src']
-            img_res = requests.get(img_src)
+            img_res = requests.get(img_src, headers=h)
             img_res.raise_for_status()
             file = open(os.path.join(cname, '%s.jpg' % num), 'wb')
             for chunk in img_res.iter_content(100000):
@@ -40,4 +40,4 @@ def download_pg(url, num, cname):
             print('一個頁面錯誤 重試中...\n', end='')
             continue
     print('已達最大重試次數')
-        
+
